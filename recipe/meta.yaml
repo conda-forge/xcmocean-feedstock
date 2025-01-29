@@ -7,22 +7,22 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/xcmocean-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/xcmocean-{{ version }}.tar.gz
   sha256: 7c55e1c0fcdea469c58331c25630e50e1d5ec0311581724f3e860c1a176cef9e
 
 build:
-  number: 0
+  number: 1
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv
 
 requirements:
   host:
     - pip
-    - python >=3.6
+    - python {{ python_min }}
     - setuptools-scm
   run:
     - cmocean
-    - python >=3.6
+    - python >={{ python_min }}
     - xarray
 
 test:
@@ -32,6 +32,7 @@ test:
     - pip check
   requires:
     - pip
+    - python {{ python_min }}
 
 about:
   home: https://github.com/kthyng/xcmocean
